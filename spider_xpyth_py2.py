@@ -5,6 +5,7 @@ import os
 import urllib
 import urllib2
 from lxml import etree
+from time import sleep
 
 class Spider:
     def __init__(self):
@@ -20,7 +21,7 @@ class Spider:
 
     def tiebaSpider(self):
         for page in range(self.beginPage, self.endPage + 1):
-            pn = (page - 1) * 50 # page number
+            pn = (page - 1) * 50 #　页数 
             word = {'pn' : pn, 'kw': self.tiebaName}
 
             word = urllib.urlencode(word) #转换成url编码格式（字符串）
@@ -67,9 +68,9 @@ class Spider:
         '''
 
         print imagesLink
-        print "正在存储文件 %d ..." % self.userName
+        print "正在下载图片 {}..." .format(self.userName)
         # 1. 打开文件，返回一个文件对象
-        file = open('./jiese/' + str(self.userName)  + '.jpg', 'wb')
+        file = open('./bizhi/' + str(self.userName)  + '.jpg', 'wb')
 
         # 2. 获取图片里的内容
         images = urllib2.urlopen(imagesLink).read()
@@ -83,7 +84,6 @@ class Spider:
         # 计数器自增1
         self.userName += 1
 
-# 模拟 main 函数
 if __name__ == "__main__":
 
     # 首先创建爬虫对象
